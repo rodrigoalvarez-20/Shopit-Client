@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">Shopit</string>
+    <string name="lblLogin">Inicio de sesión</string>
+    <string name="btnLogin">Iniciar sesión</string>
+    <string name="btnSendRegister">Crear una nueva cuenta</string>
+    <string name="lblEmail">Email</string>
+    <string name="lblPwd">Contraseña</string>
+    <string name="lblRegister">Registro de usuario</string>
+    <string name="lblName">Nombre</string>
+    <string name="lblLastName">Apellidos</string>
+    <string name="lblPhone">Telefono</string>
+    <string name="lblGender">Genero</string>
+    <string name="btnRegister">Registrarse</string>
+    <string name="lblQuantity">Cantidad</string>
+    <string name="btnAddToCart">Añadir</string>
+
+    <string name="htSearch">Buscar producto</string>
+
+    <string name="lblAddProd">Crear nuevo producto</string>
+    <string name="lblSelImage">Seleccionar imagen</string>
+    <string name="btnSelImg">Abrir archivo</string>
+    <string name="lblProdSku">SKU:</string>
+    <string name="lblProdName">Nombre:</string>
+    <string name="lblDescripcion">Descripcion:</string>
+    <string name="lblProdPrice">Precio:</string>
+    <string name="lblProdStock">Stock inicial:</string>
+    <string name="lblProdCat">Categoria:</string>
+
+    <string name="btnAddProd">Crear producto</string>
+    <string name="btnLogout">Cerrar sesión</string>
+
+    <string name="lblProfile">Perfil de usuario</string>
+    <string name="lblProfilePurchases">Mis compras</string>
+    <string name="lblShopCart">Carrito de compras</string>
+    <string name="phUserName">%s %s</string>
+
+    <string name="btnPurchaseInfo"># Productos: %d - Total: %.2f</string>
+
+    <string name="btnCheckout">Pagar: $%.2f</string>
+
+    <string name="lblEmptyCart">No hay productos en su carrito</string>
+
+    <string name="lblCat">Categoria: %s</string>
+    <string name="lblPrice">Precio: $%.2f</string>
+    <string name="lblStock">Stock: %d</string>
+    <string name="lblSku">Sku: %s</string>
+
+    <string name="lblQuantityPurchase"># Items: %d</string>
+
+    <string-array name="spGender">
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
+
+    <string name="abLogin">Shopit - Login</string>
+    <string name="abRegister">Shopit - Register</string>
+    <string name="abHome">Shopit - Inicio</string>
+    <string name="abProfile">Shopit - Perfil de usuario</string>
+    <string name="abCart">Shopit - Carrito</string>
+    <string name="abProduct">Shopit - Informacion del producto</string>
+    <string name="abAddProduct">Shopit - Crear producto</string>
+
+    <!-- Descripciones -->
+    <string name="ds_logo">Shopit Logo</string>
+
+    <!-- Menu inferior de navegacion -->
+    <string name="navInicio">Inicio</string>
+    <string name="navPerfil">Perfil</string>
+    <string name="navCarrito">Carrito</string>
+    <string name="navProd">Añadir Producto</string>
+
+
+    <string name="btnDeleteProdInCart">Eliminar</string>
+    <string name="btnDissmisDialog">Cancelar</string>
+    <string name="lblDialogRemoveProduct">¿Está seguro de querer eliminar el producto del carrito?</string>
+    <string name="lblDialogRemoveCart">¿Está seguro de querer eliminar todos los productos del carrito?</string>
+
+    <!-- Errores -->
+    <string name="errEmptyFields">No puede dejar los campos vacios</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
