@@ -73,7 +73,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
         holder.lblProdPrice.setText(this.ctx.getString(R.string.lblPrice, p.getPrice()));
         holder.lblProdQuantity.setText(String.valueOf(p.getQuantity()));
 
-        Picasso.get().load("http://20.225.97.73/" + p.getImage()).into(holder.imgProduct);
+        Picasso.get().load(p.getImage()).into(holder.imgProduct);
 
         //Añadir los listeners para los botones y notificar al badge
 

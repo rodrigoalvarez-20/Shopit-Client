@@ -56,44 +56,21 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.View
     public void onBindViewHolder(@NonNull PurchasesAdapter.ViewHolder holder, int position) {
         Purchase purchase = purchasesList.get(position);
 
-        holder.btnShowPurchaseInfo.setText(this.ctx.getString(R.string.btnPurchaseInfo, purchase.getTotal_products(), purchase.getTotal()));
+        holder.btnShowPurchaseInfo.setText(this.ctx.getString(R.string.btnPurchaseInfo, purchase.getDate(), purchase.getTotal()));
         // rcv Cambiar visibilidad
         holder.btnShowPurchaseInfo.setOnClickListener(v -> {
 
             if (holder.rcvPurchaseItems.getVisibility() == View.VISIBLE){
                 holder.rcvPurchaseItems.setVisibility(View.GONE);
             }else {
-                String tk = Common.getTokenValue(this.ctx.getSharedPreferences("prefs", Context.MODE_PRIVATE));
-
-                Call<ArrayList<Product>> productsPurchaseCall = ApiAdapter.getApiService().getProductsPurchase(tk, purchase.getId());
-
-                // Llamar api, crear adaptador y cambiar visibilidad
-
-                productsPurchaseCall.enqueue(new Callback<ArrayList<Product>>() {
-                    @Override
-                    public void onResponse(@NonNull Call<ArrayList<Product>> call, @NonNull Response<ArrayList<Product>> response) {
-                        if(response.isSuccessful()){
-                            ArrayList<Product> prods = response.body();
-                            ProductPurchaseAdapter ppAdapter = new ProductPurchaseAdapter(prods, ctx);
-                            holder.rcvPurchaseItems.setAdapter(ppAdapter);
-                            holder.rcvPurchaseItems.setLayoutManager(new LinearLayoutManager(ctx));
-                            holder.rcvPurchaseItems.setVisibility(View.VISIBLE);
-                        }else {
-                            Toasty.error(ctx, "Ha ocurrido un error al obtener la lista de compras", Toasty.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<ArrayList<Product>> call,@NonNull Throwable t) {
-                        System.out.println(t.getLocalizedMessage());
-                        Toasty.error(ctx, "Ha ocurrido un error en la peticion", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                //Aqui
+                ArrayList<Product> prods = purchase.getProducts();
+                ProductPurchaseAdapter ppAdapter = new ProductPurchaseAdapter(prods, ctx);
+                holder.rcvPurchaseItems.setAdapter(ppAdapter);
+                holder.rcvPurchaseItems.setLayoutManager(new LinearLayoutManager(ctx));
+                holder.rcvPurchaseItems.setVisibility(View.VISIBLE);
             }
         });
-
-
 
     }
 

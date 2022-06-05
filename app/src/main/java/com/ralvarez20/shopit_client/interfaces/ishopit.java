@@ -24,7 +24,7 @@ public interface ishopit {
     Call<GenericResponse> registerUser(@Body RequestBody body);
 
     @GET("products")
-    Call<ArrayList<Product>> getProducts(@Header("Authorization") String tk, @Query("name") String name);
+    Call<ArrayList<Product>> getProducts(@Header("Authorization") String tk, @Query("value") String name);
 
     @POST("products/add")
     Call<GenericResponse> addNewProduct(@Header("Authorization") String tk, @Body Product prod);
@@ -32,11 +32,11 @@ public interface ishopit {
     @GET("users/me")
     Call<User> getProfile(@Header("Authorization") String tk);
 
-    @GET("users/me/purchases")
+    /*@GET("users/me/purchases")
     Call<ArrayList<Purchase>> getPurchases(@Header("Authorization") String tk);
 
     @GET("users/me/purchases/products")
-    Call<ArrayList<Product>> getProductsPurchase(@Header("Authorization") String tk, @Query("purchase") int id_purchase);
+    Call<ArrayList<Product>> getProductsPurchase(@Header("Authorization") String tk, @Query("purchase") int id_purchase);*/
 
     @POST("purchases")
     Call<GenericResponse> makePurchase(@Header("Authorization") String tk, @Body ArrayList<Product> products);

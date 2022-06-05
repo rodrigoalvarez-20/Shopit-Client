@@ -2,10 +2,12 @@ package com.ralvarez20.shopit_client.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class User {
     @SerializedName("name")
     private String name;
-    @SerializedName("last_name")
+    @SerializedName("lastname")
     private String last_name;
     @SerializedName("email")
     private String email;
@@ -13,6 +15,8 @@ public class User {
     private String phone;
     @SerializedName("gender")
     private String gender;
+    @SerializedName("purchases")
+    private ArrayList<Purchase> purchases;
     @SerializedName("error")
     private String error;
 
@@ -31,6 +35,15 @@ public class User {
         this.phone = phone;
         this.gender = gender;
         this.error = error;
+    }
+
+    public User(String name, String last_name, String email, String phone, String gender, ArrayList<Purchase> purchases) {
+        this.name = name;
+        this.last_name = last_name;
+        this.email = email;
+        this.phone = phone;
+        this.gender = gender;
+        this.purchases = purchases;
     }
 
     public String getName(){
@@ -55,6 +68,14 @@ public class User {
 
     public void setName(String v){
         this.name = v;
+    }
+
+    public ArrayList<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(ArrayList<Purchase> purchases) {
+        this.purchases = purchases;
     }
 
     public void setLastName(String v){

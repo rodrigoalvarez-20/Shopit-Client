@@ -75,7 +75,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         holder.btnAddToCart.setClickable(p.getStock() > 0);
 
-        Picasso.get().load("http://20.225.97.73/" + p.getImage()).into(holder.imgProduct);
+        Picasso.get().load(p.getImage()).into(holder.imgProduct);
 
         holder.btnAddToCart.setOnClickListener(v -> {
 

@@ -85,42 +85,53 @@ public class Profile extends Fragment {
         });
 
         getProfileInfo();
-        getProfilePurchases();
 
         return v;
     }
 
-    private void getProfileInfo(){
-        if (getActivity() != null){
+    private void getProfileInfo() {
+        if (getActivity() != null) {
             Context ctx = getContext();
             String tk = Common.getTokenValue(getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE));
             Call<User> userCall = ApiAdapter.getApiService().getProfile(tk);
-            if (ctx != null){
+            if (ctx != null) {
                 userCall.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                        if(response.isSuccessful()){
-                            if(response.body() != null){
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
                                 // Asignar valores
                                 User usr = response.body();
-                                lblName.setText( ctx.getString(R.string.phUserName, usr.getName(), usr.getLastName()));
+                                lblName.setText(ctx.getString(R.string.phUserName, usr.getName(), usr.getLastName()));
                                 lblEmail.setText(usr.getEmail());
                                 lblPhone.setText(usr.getPhone());
                                 lblGender.setText(usr.getGender().equals("M") ? "Masculino" : "Femenino");
                                 lyInfo.setVisibility(View.VISIBLE);
+
+                                ArrayList<Purchase> purchases = usr.getPurchases();
+
+                                if (purchases != null){
+                                    PurchasesAdapter pAdapter = new PurchasesAdapter(purchases, ctx);
+                                    rcvProfilePurchases.setAdapter(pAdapter);
+                                    rcvProfilePurchases.setLayoutManager(new LinearLayoutManager(ctx));
+                                }
+
+                                lyPurchases.setVisibility(View.VISIBLE);
+                                loadingIndicator.setVisibility(View.GONE);
+
                             }
-                        }else if(response.errorBody() != null){
+                        } else if (response.errorBody() != null) {
                             try {
                                 JSONObject jsonErr = new JSONObject(response.errorBody().string());
                                 Toasty.warning(ctx, jsonErr.getString("error"), Toast.LENGTH_SHORT).show();
-                            }catch (Exception ex){
+                            } catch (Exception ex) {
                                 Toasty.error(ctx, "Ha ocurrido un error en la peticion", Toasty.LENGTH_SHORT).show();
                             }
                         }
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<User> call, @NonNull  Throwable t) {
+                    public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                         System.out.println(t.getLocalizedMessage());
                         Toasty.error(ctx, "Ha ocurrido un error en la peticion", Toast.LENGTH_SHORT).show();
                     }
@@ -129,37 +140,4 @@ public class Profile extends Fragment {
         }
 
     }
-
-    private void getProfilePurchases(){
-        if(getActivity() != null && getContext() != null){
-            Context ctx = getContext();
-            String tk = Common.getTokenValue(getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE));
-
-            Call<ArrayList<Purchase>> purchasesCall = ApiAdapter.getApiService().getPurchases(tk);
-
-            purchasesCall.enqueue(new Callback<ArrayList<Purchase>>() {
-                @Override
-                public void onResponse(@NonNull Call<ArrayList<Purchase>> call, @NonNull Response<ArrayList<Purchase>> response) {
-                    if(response.isSuccessful()){
-                        ArrayList<Purchase> purchases = response.body();
-                        PurchasesAdapter pAdapter = new PurchasesAdapter(purchases, ctx);
-                        rcvProfilePurchases.setAdapter(pAdapter);
-                        rcvProfilePurchases.setLayoutManager(new LinearLayoutManager(ctx));
-                        lyPurchases.setVisibility(View.VISIBLE);
-                        loadingIndicator.setVisibility(View.GONE);
-                    }else {
-                        Toasty.error(ctx, "Ha ocurrido un error al obtener la lista de compras", Toasty.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<ArrayList<Purchase>> call, @NonNull Throwable t) {
-                    System.out.println(t.getLocalizedMessage());
-                    Toasty.error(ctx, "Ha ocurrido un error en la peticion", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-        }
-    }
-
 }

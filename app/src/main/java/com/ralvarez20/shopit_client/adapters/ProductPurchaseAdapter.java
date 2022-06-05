@@ -50,7 +50,7 @@ public class ProductPurchaseAdapter extends RecyclerView.Adapter<ProductPurchase
         holder.lblPPCategory.setText(this.ctx.getString(R.string.lblCat, p.getCategory()));
         holder.lblPPQuantity.setText(this.ctx.getString(R.string.lblQuantityPurchase, p.getQuantity()));
         holder.lblPPPrice.setText(this.ctx.getString(R.string.lblPrice, p.getPrice()));
-        Picasso.get().load("http://20.225.97.73/" + p.getImage()).into(holder.imgPPImage);
+        Picasso.get().load(p.getImage()).into(holder.imgPPImage);
     }
 
     @Override

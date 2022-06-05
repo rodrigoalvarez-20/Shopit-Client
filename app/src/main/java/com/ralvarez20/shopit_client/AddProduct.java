@@ -100,7 +100,6 @@ public class AddProduct extends Fragment {
                 String prodCat = txtProdCat.getText().toString().trim();
                 double prodPrice = Double.parseDouble(txtProdPrice.getText().toString().trim());
                 int prodStock = Integer.parseInt(txtProdStock.getText().toString().trim());
-
                 Product prodToAdd = new Product(0, b64Image, prodSku, prodName, prodDesc, prodCat, prodStock, 0, prodPrice);
                 String tk = Common.getTokenValue(getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE));
                 Call<GenericResponse> addProdReq = ApiAdapter.getApiService().addNewProduct(tk, prodToAdd);
@@ -134,7 +133,6 @@ public class AddProduct extends Fragment {
                         loadingIndicator.setVisibility(View.GONE);
                     }
                 });
-
             }
         });
 

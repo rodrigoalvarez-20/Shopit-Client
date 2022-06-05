@@ -1,6 +1,12 @@
 package com.ralvarez20.shopit_client.utilities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+
+import com.ralvarez20.shopit_client.Login;
+
+import io.paperdb.Paper;
 
 public class Common {
 
@@ -17,7 +23,5 @@ public class Common {
         editor.remove("token");
         editor.commit();
     }
-
-
 
 }

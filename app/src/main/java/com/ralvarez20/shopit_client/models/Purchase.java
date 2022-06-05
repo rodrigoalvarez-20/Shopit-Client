@@ -1,30 +1,24 @@
 package com.ralvarez20.shopit_client.models;
 
-public class Purchase {
-    private  int id, id_usuario, total_products;
-    private double total;
+import com.google.gson.annotations.SerializedName;
 
-    public Purchase(int id, int id_usuario, int total_products, double total) {
-        this.id = id;
-        this.id_usuario = id_usuario;
+import java.util.ArrayList;
+
+public class Purchase {
+    @SerializedName("no_items")
+    private int total_products;
+    @SerializedName("total")
+    private double total;
+    @SerializedName("products")
+    private ArrayList<Product> products;
+    @SerializedName("date")
+    private String date;
+
+    public Purchase(int total_products, double total, ArrayList<Product> products, String date) {
         this.total_products = total_products;
         this.total = total;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId_usuario() {
-        return id_usuario;
-    }
-
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+        this.products = products;
+        this.date = date;
     }
 
     public int getTotal_products() {
@@ -41,5 +35,21 @@ public class Purchase {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

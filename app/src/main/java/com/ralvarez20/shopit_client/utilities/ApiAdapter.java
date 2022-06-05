@@ -2,6 +2,8 @@ package com.ralvarez20.shopit_client.utilities;
 
 import com.ralvarez20.shopit_client.interfaces.ishopit;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -15,10 +17,14 @@ public class ApiAdapter {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         // Asociamos el interceptor a las peticiones
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+                .readTimeout(80, TimeUnit.SECONDS)
+                .connectTimeout(80, TimeUnit.SECONDS);
         httpClient.addInterceptor(logging);
 
-        String baseUrl = "http://20.225.97.73/Service/api/";
+
+
+        String baseUrl = "https://azure-shopit.azurewebsites.net/api/shopit/";
 
         if (iShopit == null) {
             Retrofit retrofit = new Retrofit.Builder()

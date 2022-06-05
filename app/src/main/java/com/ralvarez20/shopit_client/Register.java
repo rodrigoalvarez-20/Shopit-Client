@@ -85,7 +85,7 @@ public class Register extends AppCompatActivity {
             loadingIndicator.setVisibility(View.VISIBLE);
             Map<String, String> registerBody = new HashMap<>();
             registerBody.put("name", txtName.getText().toString().trim());
-            registerBody.put("last_name", txtLastName.getText().toString().trim());
+            registerBody.put("lastname", txtLastName.getText().toString().trim());
             registerBody.put("email", txtEmail.getText().toString().trim());
             registerBody.put("password", txtPwd.getText().toString().trim());
             registerBody.put("phone", txtPhone.getText().toString().trim());

@@ -1,6 +1,7 @@
 package com.ralvarez20.shopit_client;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
+import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,7 +80,6 @@ public class Home extends Fragment {
         }
 
         btnSearch.setOnClickListener(v -> {
-            System.out.println("Clicked");
             rcvProducts.setVisibility(View.GONE);
             loadingIndicator.setVisibility(View.VISIBLE);
             fetchProducts();
@@ -96,7 +97,6 @@ public class Home extends Fragment {
             if (!txtSearchQuery.getText().toString().trim().isEmpty()){
                 queryValue = txtSearchQuery.getText().toString().trim();
             }
-            System.out.println(queryValue);
             Call<ArrayList<Product>> productsCall = ApiAdapter.getApiService().getProducts(token, queryValue);
 
             productsCall.enqueue(new Callback<ArrayList<Product>>() {
@@ -105,17 +105,30 @@ public class Home extends Fragment {
                     if(response.isSuccessful()){
                         ArrayList<Product> products = response.body();
                         // Recycler View
-                        setContentInAdapter(products);
+                        if (products != null && products.size() > 0){
+                            setContentInAdapter(products);
+                            rcvProducts.setVisibility(View.VISIBLE);
+                            loadingIndicator.setVisibility(View.GONE);
+                        }else {
+                            if (getContext() != null){
+                                Toasty.warning(getContext(), "No se han encontrado productos", Toasty.LENGTH_SHORT).show();
+                                loadingIndicator.setAnimation(R.raw.empty_data);
+                            }
+                        }
                     }else if(response.errorBody() != null){
                         try {
                             JSONObject jsonErr = new JSONObject(response.errorBody().string());
+                            if(jsonErr.getString("error").equals("Autenticación fallida")){
+                                Paper.book().delete("cart");
+                                Common.removeToken(getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE));
+                                startActivity(new Intent(getContext(), Login.class));
+                                getActivity().finish();
+                            }
                             Toasty.warning(Home.super.getContext(), jsonErr.getString("error"), Toast.LENGTH_SHORT).show();
                         }catch (Exception ex){
                             Toasty.error(Home.super.getContext(), "Ha ocurrido un error en la peticion", Toasty.LENGTH_SHORT).show();
                         }
                     }
-                    rcvProducts.setVisibility(View.VISIBLE);
-                    loadingIndicator.setVisibility(View.GONE);
                     lySearch.setVisibility(View.VISIBLE);
                 }
 

@@ -34,7 +34,7 @@
     <string name="lblShopCart">Carrito de compras</string>
     <string name="phUserName">%s %s</string>
 
-    <string name="btnPurchaseInfo"># Productos: %d - Total: %.2f</string>
+    <string name="btnPurchaseInfo">Fecha: %s - Total: %.2f</string>
 
     <string name="btnCheckout">Pagar: $%.2f</string>
 
