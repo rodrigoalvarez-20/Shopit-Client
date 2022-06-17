@@ -24,7 +24,7 @@ public class ApiAdapter {
 
 
 
-        String baseUrl = "https://azure-shopit.azurewebsites.net/api/shopit/";
+        String baseUrl = "https://azure-shopit.azurewebsites.net/api/shopit/y";
 
         if (iShopit == null) {
             Retrofit retrofit = new Retrofit.Builder()

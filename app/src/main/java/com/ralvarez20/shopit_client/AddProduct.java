@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -37,6 +39,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import es.dmoral.toasty.Toasty;
+import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,6 +60,14 @@ public class AddProduct extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatActivity superAct = (AppCompatActivity) getActivity();
+        if (superAct != null ){
+            ActionBar actBar = superAct.getSupportActionBar();
+            if (actBar != null){
+                actBar.setTitle(R.string.abAddProduct);
+            }
+            Paper.init(superAct.getApplicationContext());
+        }
     }
 
     @Override

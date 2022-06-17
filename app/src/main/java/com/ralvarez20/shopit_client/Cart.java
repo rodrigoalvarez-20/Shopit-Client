@@ -113,6 +113,7 @@ public class Cart extends Fragment {
         }
 
         btnCheckout.setOnClickListener(ck -> {
+            btnCheckout.setEnabled(false);
             if (getContext() != null){
                 productsInCart = Paper.book().read("cart", new ArrayList<>());
                 String tk = Common.getTokenValue(getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE));
@@ -140,6 +141,7 @@ public class Cart extends Fragment {
                                 }
                             }
                         }
+                        btnCheckout.setEnabled(true);
                     }
 
                     @Override
@@ -148,6 +150,7 @@ public class Cart extends Fragment {
                         Toasty.error(getContext(), "Ha ocurrido un error en la peticion", Toast.LENGTH_SHORT).show();
                         btnCheckout.setVisibility(View.VISIBLE);
                         loadingIndicator.setVisibility(View.GONE);
+                        btnCheckout.setEnabled(true);
                     }
                 });
 
